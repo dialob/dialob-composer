@@ -4,7 +4,7 @@ export type Type = 'VISIBILITY' | 'VALIDATION' | 'REQUIREMENT' | 'VARIABLE' | 'G
 
 
 export interface ConfigState {
-  state: Config  
+  state: Config
 }
 
 export interface Config {
