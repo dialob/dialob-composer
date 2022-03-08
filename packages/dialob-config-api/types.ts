@@ -1,5 +1,5 @@
 export interface Csrf { token: string, headerName: string }
-export type Level = 'INFO' | 'WARNING' | 'ERROR' | 'FATAL';
+export type Level = 'INFO' | 'WARNING' | 'ERROR' | 'FATAL' | 'OK';
 export type Type = 'VISIBILITY' | 'VALIDATION' | 'REQUIREMENT' | 'VARIABLE' | 'GENERAL' | 'CLASSNAME' | 'VALUESET' | 'VALUESET_ENTRY';
 
 
@@ -75,8 +75,9 @@ export interface Form {
 
   name: string;
   data: Record<string, FormItem>;
-  metadata: Record<string, Metadata>;
+  metadata: Metadata;
   variables: Variable[];
+  languages: string[];
   namespaces: Record<string, Form>;
   valueSets: ValueSet[];
   requiredErrorText: Record<string, string>;
