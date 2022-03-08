@@ -1,4 +1,4 @@
-import * as Client from './FormService';
+import * as Client from './types';
 
 
 function checkResponse(response: Response) {
@@ -12,13 +12,13 @@ function checkResponse(response: Response) {
 
 export default class FormServiceImpl implements Client.FormService {
   private baseUrl: string;
-  private csrf: Client.Csrf;
+  private csrf?: Client.Csrf;
   private tenantId: string;
 
-  constructor(baseUrl: string, csrf: Client.Csrf, tenantId: string) {
-    this.baseUrl = baseUrl;
-    this.csrf = csrf;
-    this.tenantId = tenantId;
+  constructor(init: Client.Config) {
+    this.baseUrl = init.transport.apiUrl;
+    this.csrf = init.transport.csrf;
+    this.tenantId = init.transport.tenantId;
   }
 
   doFetch(url: string, method: string, body: Client.Form | Client.Tag | Client.Questionnaire | undefined = undefined) {

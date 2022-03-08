@@ -1,9 +1,73 @@
 export interface Csrf { token: string, headerName: string }
-export type FormId = string;
-export type FormRev = string;
 export type Level = 'INFO' | 'WARNING' | 'ERROR' | 'FATAL';
 export type Type = 'VISIBILITY' | 'VALIDATION' | 'REQUIREMENT' | 'VARIABLE' | 'GENERAL' | 'CLASSNAME' | 'VALUESET' | 'VALUESET_ENTRY';
 
+
+export interface ConfigState {
+  state: Config  
+}
+
+export interface Config {
+  transport: {
+    csrf?: Csrf,
+    apiUrl: string,
+    previewUrl: string,
+    tenantId: string,
+  },
+  itemEditors: {
+    items: {
+      matcher: (item: any) => boolean,
+      component: React.ReactElement,
+      props: {
+        icon: string,
+        placeholder: string,
+        treeCollapsible: boolean,
+      }
+    }[]
+  },
+  itemTypes: {
+
+    categories: {
+      title: string,
+      type: 'structure' | 'input' | 'output',
+      convertible?: ( 'verticalSurveygroup' | 'surveygroup' | 'textBox' | 
+                      'address' | 'text' | 'number' | 'decimal' | 'multichoice' | 'list')[]
+      items: {
+        title: string,
+        optionEditors?: { name: string, editor: React.ReactElement }[],
+        propEditors?: {
+          columns?: {
+            component: React.ReactElement,
+            props: { type: 'number', min: number, max: number }
+          },
+          country?: {
+            component: React.ReactElement,
+            props: {
+              allowAdditions: boolean,
+              options: { key: string, label: string }[]
+            }
+          },
+        }
+        config: {
+          type: 'group' | 'surveygroup' | 'rowgroup' | 'note' | 'text' | 'survey' |
+          'decimal' | 'number' | 'boolean' | 'date' | 'time' | 'list' | 'multichoice';
+          view?: 'verticalSurveygroup' | 'text' | 'textBox' | 'address' | 'survey' | string;
+          props?: {
+            columns?: number
+            country?: []
+          }
+        }
+      }[],
+    }[],
+  }
+  valueSetProps: { title: string, name: string, editor: React.ReactElement }[],
+  closeHandler: () => void;
+};
+
+
+
+export type FormId = string;
+export type FormRev = string;
 
 export interface Form {
   _id: FormId
@@ -128,64 +192,6 @@ export interface Questionnaire {
   context?: {};
 }
 
-
-export interface Config {
-  transport: {
-    csrf?: Csrf,
-    apiUrl: string,
-    previewUrl: string,
-    tenantId: string,
-  },
-  itemEditors: {
-    items: {
-      matcher: (item: any) => boolean,
-      component: React.ReactElement,
-      props: {
-        icon: string,
-        placeholder: string,
-        treeCollapsible: boolean,
-      }
-    }[]
-  },
-  itemTypes: {
-
-    categories: {
-      title: string,
-      type: 'structure' | 'input' | 'output',
-      convertible?: ( 'verticalSurveygroup' | 'surveygroup' | 'textBox' | 
-                      'address' | 'text' | 'number' | 'decimal' | 'multichoice' | 'list')[]
-      items: {
-        title: string,
-        optionEditors?: { name: string, editor: React.ReactElement }[],
-        propEditors?: {
-          columns?: {
-            component: React.ReactElement,
-            props: { type: 'number', min: number, max: number }
-          },
-          country?: {
-            component: React.ReactElement,
-            props: {
-              allowAdditions: boolean,
-              options: { key: string, label: string }[]
-            }
-          },
-        }
-        config: {
-          type: 'group' | 'surveygroup' | 'rowgroup' | 'note' | 'text' | 'survey' |
-          'decimal' | 'number' | 'boolean' | 'date' | 'time' | 'list' | 'multichoice';
-          view?: 'verticalSurveygroup' | 'text' | 'textBox' | 'address' | 'survey' | string;
-          props?: {
-            columns?: number
-            country?: []
-          }
-        }
-      }[],
-    }[],
-  }
-  valueSetProps: { title: string, name: string, editor: React.ReactElement }[],
-  closeHandler: () => void;
-};
-
 export interface FormService {
   loadForm(formId: FormId, tagName?: string): Promise<Form>;
   saveForm(formData: Form, dryRun?: boolean): Promise<FormUpdated>;
@@ -196,3 +202,5 @@ export interface FormService {
   createTag(formName: string, tagName: string, tagDescription: string, formId?: FormId): Promise<TagCreated>;
 }
 
+
+// Export
