@@ -44,7 +44,7 @@ export const useEditor = () => {
   
   
   return { 
-    state, 
+    state: state.state, 
     askConfirmation,
     setStatus,
     setErrors,

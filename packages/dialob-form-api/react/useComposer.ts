@@ -106,6 +106,7 @@ export const useComposer = () => {
   }
 
   return {
+    state,
     addItem,
     updateItem,
     changeItemType,

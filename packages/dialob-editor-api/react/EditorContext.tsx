@@ -11,6 +11,7 @@ interface EditorContextType {
 
 const init: Editor = {
   versions: [],
+  tag: 'LATEST',
   loaded: false,
   formOptions: false,
   variablesDialog: false,

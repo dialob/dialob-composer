@@ -10,7 +10,8 @@ export type {
 
 export interface Editor {
   loaded: boolean;
-
+  tag: string | 'LATEST'; //active tag
+  
   changeId?: string;
   rootItemId?: string;
   activeLanguage?: string;

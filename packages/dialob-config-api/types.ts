@@ -14,6 +14,9 @@ export interface Config {
     previewUrl: string,
     tenantId: string,
   },
+  defaults: {
+    languages: {code: string, name: string, flag: string}[]
+  }
   itemEditors: {
     items: {
       matcher: (item: any) => boolean,

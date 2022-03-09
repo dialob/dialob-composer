@@ -61,6 +61,7 @@ export type DialobItem = DialobItemTemplate & {
 export type ComposerState = {
   _id: string;
   _rev: string;
+  
   name: string;
   data: {
     [item: string]: DialobItem;

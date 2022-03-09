@@ -9,6 +9,8 @@ export type EditorAction =
   | { type: 'setVersions', versions: any } // TODO
   
   | { type: 'setForm', formData: Form}
+  | { type: 'setTag', tagName: string}
+  
   | { type: 'loadForm' }
   | { type: 'setActiveItem', itemId: string }
   | { type: 'setActivePage', itemId: string }
