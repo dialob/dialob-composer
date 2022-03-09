@@ -4,7 +4,7 @@ import { ConfigState } from './types';
 
 const actions = (mutable: ConfigState, action: ConfigAction): void => {
   if (action.type === 'setConfig') {
-    mutable.state = action.config;
+    mutable.config = action.config;
   } else {
     console.error("Config reducer, unknown action", action);
   }

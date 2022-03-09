@@ -1,8 +1,12 @@
-import { FormValidationError, Level } from '../dialob-config-api'
+import { FormValidationError, Level, Form } from '../dialob-config-api'
 
 export interface EditorState {
   state: Editor  
 }
+
+export type {
+  Level, FormValidationError, Form
+};
 
 export interface Editor {
   loaded: boolean;
