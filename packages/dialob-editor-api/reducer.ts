@@ -69,6 +69,10 @@ const actions = (state: Editor, action: EditorAction): void => {
       state.loaded = true;
       return;
     }
+    case 'setTag': {
+      state.tag = action.tagName;
+      return;
+    }
     case 'loadForm': {
       state.loaded = false;
       state.rootItemId = undefined;

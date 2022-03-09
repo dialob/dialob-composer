@@ -22,6 +22,8 @@ export const useEditor = () => {
   const performChangeId = (id: {old: string, new: string}): void => dispatch({ type: 'performChangeId', id})
   const setTreeCollapse = (props: {collapsed: boolean, itemId: string}): void => dispatch({ type: 'setTreeCollapse', collapsed: props.collapsed, itemId: props.itemId })
   
+  const setTag = (tagName: string): void => dispatch({ type: 'setTag', tagName})
+  
   const cancelConfirmation =  (): void => dispatch({ type: 'cancelConfirmation'}) 
   const loadForm =            (): void => dispatch({ type: 'loadForm' })  
   const hideItemOptions =     (): void => dispatch({ type: 'hideItemOptions' })
@@ -60,6 +62,7 @@ export const useEditor = () => {
     performChangeId,
     setTreeCollapse,
       
+    setTag,
     cancelConfirmation, 
     loadForm,
     hideItemOptions,
