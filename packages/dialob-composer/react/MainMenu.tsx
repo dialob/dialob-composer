@@ -2,44 +2,65 @@ import React from 'react';
 import { Container, Menu, Icon, Dropdown, Popup } from 'semantic-ui-react';
 
 import StatusIndicator from './StatusIndicator';
-import * as Status from '../helpers/constants';
 import SearchMenu from './SearchMenu';
 import { Dialob } from '../global';
+import { downloadForm, requestPreview } from './util';
+
+const Languages: React.FC<{}> = () => {
+  const config = Dialob.useConfig();
+  const form = Dialob.useForm();
+  const formLanguages = form.state.metadata.languages;
+  const editor = Dialob.useEditor();
+
+  return (<>{
+    config.state.config.defaults.languages
+      .filter(lang => formLanguages?.includes(lang.code))
+      .map((lang, i) =>
+        <Dropdown.Item key={i} active={lang.code === editor.state.activeLanguage}
+          onClick={() => editor.setActiveLang(lang.code)}>{lang.name}</Dropdown.Item>)
+  }</>);
+}
 
 
 const MainMenu: React.FC<{}> = ({ }) => {
-  const form = Dialob.useEditor();
+  const config = Dialob.useConfig();
+  const form = Dialob.useForm();
+  const editor = Dialob.useEditor();
+  const formTag = editor.state.tag;
+  const status = editor.state.status;
 
-
-  const formTag = form.state.tag;
   return (
     <Container>
       <Menu fixed='top'>
         <Menu.Item header>
           Dialob Composer
-          &nbsp;<small>{this.props.formLabel}</small>
+          &nbsp;<small>{form.state.metadata.label}</small>
         </Menu.Item>
 
-        <Menu.Item onClick={this.props.showTranslation}>
+        <Menu.Item onClick={editor.showTranslation}>
           Translations
         </Menu.Item>
-        <Menu.Item onClick={this.props.showVariables}>
+        <Menu.Item onClick={editor.showVariables}>
           Variables
         </Menu.Item>
-        <Menu.Item onClick={this.props.showValueSets}>
+        <Menu.Item onClick={editor.showValuesets}>
           Lists
         </Menu.Item>
-        <Menu.Item onClick={this.props.showFormOptions}>
+        <Menu.Item onClick={editor.showFormOptions}>
           Options
         </Menu.Item>
         <Dropdown item text={`Version: ${formTag}`} lazyLoad>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={this.props.showVersioning}>Manage versions...</Dropdown.Item>
-            <Dropdown.Item disabled={formTag !== 'LATEST' || (this.props.status !== Status.STATUS_OK && this.props.status !== Status.STATUS_WARNINGS)} onClick={() => this.props.showNewTag()}>Create version tag</Dropdown.Item>
+            <Dropdown.Item onClick={editor.showVersioningDialog}>Manage versions...</Dropdown.Item>
+            <Dropdown.Item
+              disabled={formTag !== 'LATEST' || (status !== 'STATUS_OK' && status !== 'STATUS_WARNINGS')}
+              onClick={() => editor.showNewTag()}>
+              Create version tag
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Menu.Item onClick={() => {
-          let win = window.open(this.props.config.documentationUrl || 'https://docs.dialob.io/');
+          let win = window.open(config.state.config.defaults.documentationUrl);
           if (win) {
             win.focus();
           }
@@ -51,28 +72,30 @@ const MainMenu: React.FC<{}> = ({ }) => {
         </Menu.Item>
         <Menu.Menu position='right'>
           <SearchMenu />
-          <Menu.Item onClick={this.props.downloadForm}>
+          <Menu.Item onClick={() => downloadForm()}>
             <Popup
               trigger={<Icon name='download' />}
               content='Download dialog as JSON'
               on='hover' />
           </Menu.Item>
           <Menu.Item>
-            <StatusIndicator status={this.props.status} />
+            <StatusIndicator status={status} />
           </Menu.Item>
-          <Dropdown item text={this.getLanguageName(this.props.language)} lazyLoad>
+          <Dropdown item text={config.getLanguageName(editor.state.activeLanguage)} lazyLoad>
             <Dropdown.Menu>
-              {this.getLanguages()}
+              <Languages />
             </Dropdown.Menu>
           </Dropdown>
           {
-            this.props.config && this.props.config.transport.previewUrl &&
-            <Menu.Item disabled={this.props.status !== Status.STATUS_OK && this.props.status !== Status.STATUS_WARNINGS} onClick={this.props.requestPreview}><Icon name='eye' /> Preview</Menu.Item>
+            config.state.config.transport.previewUrl &&
+            <Menu.Item disabled={status !== 'STATUS_OK' && status !== 'STATUS_WARNINGS'}
+              onClick={requestPreview}>
+              <Icon name='eye' />Preview
+            </Menu.Item>
           }
-          {
-            this.props.config && this.props.config.closeHandler &&
-            <Menu.Item icon='close' onClick={this.props.closeEditor} />
-          }
+
+          <Menu.Item icon='close' onClick={config.state.config.closeHandler} />
+
         </Menu.Menu>
       </Menu>
     </Container>
@@ -80,18 +103,6 @@ const MainMenu: React.FC<{}> = ({ }) => {
 }
 
 /*
-
-
-  getLanguages() {
-    return Defaults.LANGUAGES
-      .filter(lang => this.props.formLanguages && this.props.formLanguages.contains(lang.code))
-      .map((lang, i) =>
-        <Dropdown.Item key={i} active={lang.code === this.props.language} onClick={() => this.props.setActiveLanguage(lang.code)}>{lang.name}</Dropdown.Item>);
-  }
-
-  getLanguageName(code) {
-    return Defaults.LANGUAGES.find(lang => lang.code === code).name;
-  }
 
 
 

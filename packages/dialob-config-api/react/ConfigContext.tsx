@@ -11,6 +11,8 @@ interface ConfigContextType {
   dispatch: Dispatch<ConfigAction>;
 }
 
+const defaults = { languages, documentationUrl: 'https://docs.dialob.io/' };
+
 export const ConfigContext = React.createContext<ConfigContextType>({
   state: {} as any,
   service: {} as any,
@@ -21,7 +23,7 @@ export const ConfigProvider: React.FC<{init: Config, children: React.ReactElemen
   const {init, children} = props;
   console.log("Config::context init", init);
   
-  const [state, dispatch] = useReducer(configReducer, { config: Object.assign({ defaults: { languages }}, init) });
+  const [state, dispatch] = useReducer(configReducer, { config: Object.assign({ defaults }, init) });
   const service: FormService = React.useMemo(() => new FormServiceImpl(init), [init]);
   
   return (<ConfigContext.Provider value={{state, dispatch, service}}>{children}</ConfigContext.Provider>);

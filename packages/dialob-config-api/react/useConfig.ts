@@ -5,5 +5,11 @@ import { Config } from "../types";
 export const useConfig = () => {
   const { state, dispatch } = useContext(ConfigContext);
   const setConfig = (config: Config): void => dispatch({type: 'setConfig', config});
-  return { state, setConfig };
+  
+  
+  const getLanguageName = (code: string) => {
+    return state.config.defaults.languages.find(lang => lang.code === code)?.name;
+  }
+  
+  return { state, setConfig, getLanguageName };
 }

@@ -1,11 +1,14 @@
-import { FormValidationError, Level, Form } from '../dialob-config-api'
+import { FormValidationError, Form } from '../dialob-config-api'
 
 export interface EditorState {
   state: Editor  
 }
 
+type EditorStatus = 'STATUS_BUSY' | 'STATUS_OK' | 'STATUS_ERRORS' | 'STATUS_FATAL' | 'STATUS_WARNINGS';
+
+
 export type {
-  Level, FormValidationError, Form
+  FormValidationError, Form, EditorStatus
 };
 
 export interface Editor {
@@ -14,7 +17,7 @@ export interface Editor {
   
   changeId?: string;
   rootItemId?: string;
-  activeLanguage?: string;
+  activeLanguage: string;
   activeItemId?: string;
   activePageId? : string;
 
@@ -31,7 +34,7 @@ export interface Editor {
   treeCollapse?: string[];
   confirmableAction?: any; // TODO::  
   versions: any // TODO 
-  status?: Level, // 'STATUS_WARNINGS' | 'STATUS_ERRORS' | 'STATUS_OK' | 'STATUS_FAIL'; // TODO
+  status: EditorStatus, // 'STATUS_WARNINGS' | 'STATUS_ERRORS' | 'STATUS_OK' | 'STATUS_FAIL'; // TODO
   errors?: FormValidationError[] //TODO 
 }
 

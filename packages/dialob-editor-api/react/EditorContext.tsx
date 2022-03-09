@@ -11,7 +11,9 @@ interface EditorContextType {
 
 const init: Editor = {
   versions: [],
+  status: 'STATUS_OK',
   tag: 'LATEST',
+  activeLanguage: 'en',
   loaded: false,
   formOptions: false,
   variablesDialog: false,

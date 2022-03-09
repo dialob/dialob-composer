@@ -15,6 +15,7 @@ export interface Config {
     tenantId: string,
   },
   defaults: {
+    documentationUrl: string,
     languages: {code: string, name: string, flag: string}[]
   }
   itemEditors: {

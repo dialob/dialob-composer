@@ -1,6 +1,7 @@
 import * as Client from './types';
 
 
+
 function checkResponse(response: Response) {
   if (response.ok) {
     return response;
