@@ -8,9 +8,48 @@ export interface ConfigState {
   service: FormService;
   defaults: {
     documentationUrl: string,
-    languages: {code: string, name: string, flag: string}[],
-    pageConfig: {type: string, view: string, id: string}
+    languages: { code: string, name: string, flag: string }[],
+    pageConfig: { type: string, view: string, id: string }
   }
+}
+
+export interface ConfigCategoryType {
+
+  title: string,
+  type: 'structure' | 'input' | 'output',
+  convertible?: ('verticalSurveygroup' | 'surveygroup' | 'textBox' |
+    'address' | 'text' | 'number' | 'decimal' | 'multichoice' | 'list')[]
+  items: ConfigItemType[],
+
+}
+
+export interface ConfigItemType {
+
+  title: string,
+  optionEditors?: { name: string, editor: React.ReactElement }[],
+  propEditors?: {
+    columns?: {
+      component: React.ReactElement,
+      props: { type: 'number', min: number, max: number }
+    },
+    country?: {
+      component: React.ReactElement,
+      props: {
+        allowAdditions: boolean,
+        options: { key: string, label: string }[]
+      }
+    },
+  }
+  config: {
+    type: 'group' | 'surveygroup' | 'rowgroup' | 'note' | 'text' | 'survey' |
+    'decimal' | 'number' | 'boolean' | 'date' | 'time' | 'list' | 'multichoice';
+    view?: 'verticalSurveygroup' | 'text' | 'textBox' | 'address' | 'survey' | string;
+    props?: {
+      columns?: number
+      country?: []
+    }
+  }
+
 }
 
 export interface Config {
@@ -31,41 +70,7 @@ export interface Config {
       }
     }[]
   },
-  itemTypes: {
-
-    categories: {
-      title: string,
-      type: 'structure' | 'input' | 'output',
-      convertible?: ( 'verticalSurveygroup' | 'surveygroup' | 'textBox' | 
-                      'address' | 'text' | 'number' | 'decimal' | 'multichoice' | 'list')[]
-      items: {
-        title: string,
-        optionEditors?: { name: string, editor: React.ReactElement }[],
-        propEditors?: {
-          columns?: {
-            component: React.ReactElement,
-            props: { type: 'number', min: number, max: number }
-          },
-          country?: {
-            component: React.ReactElement,
-            props: {
-              allowAdditions: boolean,
-              options: { key: string, label: string }[]
-            }
-          },
-        }
-        config: {
-          type: 'group' | 'surveygroup' | 'rowgroup' | 'note' | 'text' | 'survey' |
-          'decimal' | 'number' | 'boolean' | 'date' | 'time' | 'list' | 'multichoice';
-          view?: 'verticalSurveygroup' | 'text' | 'textBox' | 'address' | 'survey' | string;
-          props?: {
-            columns?: number
-            country?: []
-          }
-        }
-      }[],
-    }[],
-  }
+  itemTypes: { categories: ConfigCategoryType[] }
   valueSetProps: { title: string, name: string, editor: React.ReactElement }[],
   closeHandler: () => void;
 };

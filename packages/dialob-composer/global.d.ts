@@ -1,4 +1,4 @@
-import { useConfig } from '../dialob-config-api';
+import { useConfig, ConfigItemType, ConfigCategoryType } from '../dialob-config-api';
 import { EditorStatus, useEditor } from '../dialob-editor-api';
 import { useComposer as useForm, ContextVariable, DialobItem } from '../dialob-form-api';
 
@@ -12,7 +12,8 @@ declare namespace Dialob {
   export type {
     EditorStatus,
     DialobItem,
-    ContextVariable
+    ContextVariable,
+    ConfigItemType, ConfigCategoryType
   }
   
   

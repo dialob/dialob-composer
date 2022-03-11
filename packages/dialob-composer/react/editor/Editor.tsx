@@ -127,7 +127,8 @@ const Editor: React.FC<{}> = ({ }) => {
         activePage &&
         <Dropdown button text='Add item' disabled={!!editor.state.tag}>
           <Dropdown.Menu>
-            <ItemTypeMenu categoryFilter={(category => category.type === 'structure')} onSelect={(config) => util.addItem(config, activePageId)} />
+            <ItemTypeMenu categoryFilter={(category => category.type === 'structure')} 
+              onSelect={({config}) => util.addItem({...config, id: ''}, activePageId)} />
           </Dropdown.Menu>
         </Dropdown>
       }
