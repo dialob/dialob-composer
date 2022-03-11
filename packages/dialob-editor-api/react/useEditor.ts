@@ -1,13 +1,13 @@
 import { useContext } from "react"
 import { EditorContext } from './EditorContext';
-import { Level, FormValidationError, Form } from "../types";
+import { Form, EditorStatus, EditorError } from "../types";
 
 export const useEditor = () => {
   const { state, dispatch } = useContext(EditorContext);
 
   const askConfirmation = (action: any): void => dispatch({ type: 'askConfirmation', action }) // TODO
-  const setStatus = (status: Level): void => dispatch({ type: 'setStatus', status }) // TODO
-  const setErrors = (props: { append: boolean, errors: FormValidationError[] }): void => dispatch({ type: 'setErrors', append: props.append, errors: props.errors }) // TODO
+  const setStatus = (status: EditorStatus): void => dispatch({ type: 'setStatus', status }) // TODO
+  const setErrors = (props: { append?: boolean, errors: EditorError[] }): void => dispatch({ type: 'setErrors', append: props.append, errors: props.errors }) // TODO
   const setVersions = (versions: any): void => dispatch({ type: 'setVersions', versions }) // TODO
 
   const setForm = (formData: Form): void => dispatch({ type: 'setForm', formData })

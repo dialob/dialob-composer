@@ -1,11 +1,10 @@
 
-import { Form, FormValidationError, Level } from '../dialob-config-api'
-import {  } from "./types";
+import { EditorStatus, EditorError, Form } from "./types";
 
 export type EditorAction =
   | { type: 'askConfirmation', action: any } // TODO
-  | { type: 'setStatus', status: Level} // TODO
-  | { type: 'setErrors', append: boolean, errors: FormValidationError[]} // TODO
+  | { type: 'setStatus', status: EditorStatus} // TODO
+  | { type: 'setErrors', append?: boolean, errors: EditorError[]} // TODO
   | { type: 'setVersions', versions: any } // TODO
   
   | { type: 'setForm', formData: Form}

@@ -8,7 +8,7 @@ const DialobComposer: React.FC<{}> = () => {
 
   return (<>
 
-    <Dialob.RC.MainMenu />
+    <Dialob.FC.MainMenu />
     
     {/*
     <div className='composer-editor-wrapper'>

@@ -1,14 +1,17 @@
-import { FormValidationError, Form } from '../dialob-config-api'
+import { Form, FormValidationError } from '../dialob-config-api'
 
 export interface EditorState {
   state: Editor  
 }
 
-type EditorStatus = 'STATUS_BUSY' | 'STATUS_OK' | 'STATUS_ERRORS' | 'STATUS_FATAL' | 'STATUS_WARNINGS';
-
+export type EditorStatus = 'STATUS_BUSY' | 'STATUS_OK' | 'STATUS_ERRORS' | 'STATUS_FATAL' | 'STATUS_WARNINGS';
+export interface EditorError extends FormValidationError {
+   severity?: 'FATAL' | string, 
+   message: 'FATAL_POPUP' | string
+}
 
 export type {
-  FormValidationError, Form, EditorStatus
+  Form
 };
 
 export interface Editor {
@@ -31,11 +34,13 @@ export interface Editor {
   versioningDialog: boolean;
   newTagDialog: boolean;
 
+  contextValues?: Record<string, string | undefined>;
+
   treeCollapse?: string[];
   confirmableAction?: any; // TODO::  
   versions: any // TODO 
   status: EditorStatus, // 'STATUS_WARNINGS' | 'STATUS_ERRORS' | 'STATUS_OK' | 'STATUS_FAIL'; // TODO
-  errors?: FormValidationError[] //TODO 
+  errors?: EditorError[] //TODO 
 }
 
 

@@ -4,13 +4,14 @@ import { Container, Menu, Icon, Dropdown, Popup } from 'semantic-ui-react';
 import StatusIndicator from './StatusIndicator';
 import SearchMenu from './SearchMenu';
 import { Dialob } from '../global';
-import { downloadForm, requestPreview } from './util';
+import { useUtil } from './util';
 
 const Languages: React.FC<{}> = () => {
   const config = Dialob.useConfig();
   const form = Dialob.useForm();
   const formLanguages = form.state.metadata.languages;
   const editor = Dialob.useEditor();
+  
 
   return (<>{
     config.state.config.defaults.languages
@@ -26,6 +27,7 @@ const MainMenu: React.FC<{}> = ({ }) => {
   const config = Dialob.useConfig();
   const form = Dialob.useForm();
   const editor = Dialob.useEditor();
+  const {downloadForm, requestPreview} = useUtil();
   const formTag = editor.state.tag;
   const status = editor.state.status;
 
@@ -95,38 +97,10 @@ const MainMenu: React.FC<{}> = ({ }) => {
           }
 
           <Menu.Item icon='close' onClick={config.state.config.closeHandler} />
-
         </Menu.Menu>
       </Menu>
     </Container>
   );
 }
 
-/*
-
-
-
-const MainMenuConnected = connect(
-  state => ({
-    status: state.dialobComposer.editor && state.dialobComposer.editor.get('status'),
-    language: (state.dialobComposer.editor && state.dialobComposer.editor.get('activeLanguage')) || Defaults.FALLBACK_LANGUAGE,
-    formLanguages: state.dialobComposer.form.getIn(['metadata', 'languages']),
-    formLabel: state.dialobComposer.form.getIn(['metadata', 'label']),
-    formTag: state.dialobComposer.form.get('_tag'),
-    config: state.dialobComposer.config
-  }),
-  {
-    setActiveLanguage,
-    showFormOptions,
-    showVariables,
-    requestPreview,
-    downloadForm,
-    showValueSets,
-    showTranslation,
-    closeEditor,
-    showVersioning,
-    showNewTag
-  }
-)(MainMenu);
-*/
 export { MainMenu };

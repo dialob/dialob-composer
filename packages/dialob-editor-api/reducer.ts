@@ -14,16 +14,16 @@ function setErrors(state: Editor, errors: FormValidationError[], append: boolean
 
   if (errors && errors.length > 0) {
     if (errors.findIndex(e => e.level === 'FATAL') > -1) {
-      state.status = 'FATAL';
+      state.status = 'STATUS_FATAL';
     } else {
       if (errors.length === errors.filter(e => e.level === 'WARNING').length) {
-        state.status = 'WARNING';
+        state.status = 'STATUS_WARNINGS';
       } else {
-        state.status = 'ERROR';
+        state.status = 'STATUS_ERRORS';
       }
     }
   } else {
-    state.status = 'OK';
+    state.status = 'STATUS_OK';
   }
 }
 
@@ -67,6 +67,7 @@ const actions = (state: Editor, action: EditorAction): void => {
       state.activeItemId = selectActiveLanguage(state, languages);
       state.rootItemId = findRoot(data)?.id;
       state.loaded = true;
+      state.contextValues = undefined;
       return;
     }
     case 'setTag': {
@@ -121,7 +122,7 @@ const actions = (state: Editor, action: EditorAction): void => {
       return;
     }
     case 'setErrors': {
-      setErrors(state, action.errors, action.append);
+      setErrors(state, action.errors, action.append ? action.append : false);
       return;
     }
     case 'showFormOptions': {

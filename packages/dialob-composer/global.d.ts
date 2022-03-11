@@ -1,15 +1,24 @@
-import * as ConfigApi from '../dialob-config-api';
-import * as EditorApi from '../dialob-editor-api';
-import * as FormApi from '../dialob-form-api';
+import { useConfig } from '../dialob-config-api';
+import { EditorStatus, useEditor } from '../dialob-editor-api';
+import { useComposer as useForm, ContextVariable, DialobItem } from '../dialob-form-api';
 
-import * as MainMenuRC from './react/MainMenu';
+import * as MainMenuFC from './react/MainMenu';
 
 declare namespace Dialob {
-  const useConfig = ConfigApi.useConfig;
-  const useEditor = EditorApi.useEditor;
-  const useForm = FormApi.useComposer;
+  export type {
+    EditorStatus,
+    DialobItem,
+    ContextVariable
+    
+  }
   
-  const RC = {    
-    MainMenu: MainMenuRC.MainMenu
+  
+  export {
+    useEditor, useConfig, useForm,
+  }
+
+
+  export const FC = {   
+    MainMenu: MainMenuFC.MainMenu
   }
 }

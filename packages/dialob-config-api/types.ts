@@ -5,6 +5,7 @@ export type Type = 'VISIBILITY' | 'VALIDATION' | 'REQUIREMENT' | 'VARIABLE' | 'G
 
 export interface ConfigState {
   config: Config
+  service: FormService;
 }
 
 export interface Config {
