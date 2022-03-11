@@ -1,6 +1,6 @@
 import { useConfig, ConfigItemType, ConfigCategoryType } from '../dialob-config-api';
 import { EditorStatus, useEditor } from '../dialob-editor-api';
-import { useComposer as useForm, ContextVariable, DialobItem } from '../dialob-form-api';
+import { useComposer as useForm, ContextVariable, DialobItem, ComposerState } from '../dialob-form-api';
 
 import * as MainMenuFC from './react/main-menu/MainMenu';
 import * as RuleEditorFC from './react/rule-editor/RuleEditor';
@@ -12,7 +12,7 @@ declare namespace Dialob {
   export type {
     EditorStatus,
     DialobItem,
-    ContextVariable,
+    ContextVariable, ComposerState,
     ConfigItemType, ConfigCategoryType
   }
   

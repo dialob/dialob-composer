@@ -1,9 +1,10 @@
 import FileSaver from 'file-saver';
 import { Dialob } from '../global';
 
-function findPageForItem(formData, rootItemId, itemId) {
-  const pages = formData.getIn(['data', rootItemId, 'items']);
-  const containsItem = (item, itemId) => {
+function findPageForItem(formData: Dialob.ComposerState, rootItemId: string, itemId: string) {
+  const pages = formData.data[rootItemId].items;
+
+  const containsItem = (item: Dialob.DialobItem, itemId: string) => {
     if (!item.get('items')) {
       return false;
     }
@@ -11,7 +12,7 @@ function findPageForItem(formData, rootItemId, itemId) {
       if (childId === itemId) {
         return true;
       } else {
-        const childItem = formData.getIn(['data', childId]);
+        const childItem = formData.data[childId];
         if (containsItem(childItem, itemId)) {
           return true;
         }
@@ -20,17 +21,18 @@ function findPageForItem(formData, rootItemId, itemId) {
     return false;
   }
 
-  if (pages.contains(itemId)) {
+  if (pages?.includes(itemId)) {
     return itemId; // Active item is a page
   }
 
-  for (let pageId of pages) {
-    const page = formData.getIn(['data', pageId]);
-    if (containsItem(page, itemId)) {
-      return pageId;
+  if (pages) {
+    for (let pageId of pages) {
+      const page = formData.data[pageId];
+      if (containsItem(page, itemId)) {
+        return pageId;
+      }
     }
   }
-
   return null;
 }
 
@@ -43,33 +45,37 @@ export const useUtil = () => {
 
 
   const setActiveItem = (itemId: string, noScroll?: boolean) => {
-    
-      const pageId = findPageForItem(store.getState().dialobComposer.form, store.getState().dialobComposer.editor.get('rootItemId'), action.itemId);
+    if(!editor.state.rootItemId) {
+      return;
+    }
+    const pageId = findPageForItem(form.state, editor.state.rootItemId, itemId);
+    if(pageId) {
       editor.setActivePage(pageId);
+    }
   }
 
-  
-  const addItem = (itemTemplate: Dialob.DialobItem, parentItemId: string, afterItemId ?: string) => {
+
+  const addItem = (itemTemplate: Dialob.DialobItem, parentItemId: string, afterItemId?: string) => {
     form.addItem(itemTemplate, parentItemId, afterItemId);
-    
+
     if (config.state.postAddItem) {
       config.postAddItem(store.dispatch, action, store.getState().dialobComposer.form.getIn(['metadata', 'composer', 'transient', 'lastItem']));
-    }    
+    }
     store.getState().dialobComposer.form.getIn(['metadata', 'composer', 'transient', 'lastItem'])
-    
+
   }
 
   const copyItem = (itemId: string) => {
-    formService.duplicateItem(store.getState().dialobComposer.form.toJS(), action.itemId)
+    config.state.service.duplicateItem(form.state as any, itemId)
       .then(json => {
-        store.dispatch(setFormRevision(json.rev));
-        store.dispatch(setErrors(json.errors));
+        form.setFormRevision(json.rev);
+        editor.setErrors(json);
         if (json.form) {
-          store.dispatch(setForm(json.form));
-          store.dispatch(saveForm());
+          setForm(json.form);
+          saveForm();
         }
       })
-      .catch(error => store.dispatch(setErrors([{ severity: 'FATAL', message: error.message }])));
+      .catch(error => editor.setErrors({errors: [{ severity: 'FATAL', message: error.message }] }));
   }
 
   const downloadForm: (tagName?: string) => void = (tagName?: string) => {
