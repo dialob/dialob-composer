@@ -48,7 +48,6 @@ const TreeViewConnected = connect(
 )(TreeView);
 
 export {
-  TreeViewConnected as default,
   TreeView
 };
 

@@ -4,7 +4,7 @@ import { useComposer as useForm, ContextVariable, DialobItem, ComposerState } fr
 
 import * as MainMenuFC from './react/main-menu/MainMenu';
 import * as RuleEditorFC from './react/rule-editor/RuleEditor';
-import * as ErroListFC from './react/ErrorList';
+import * as ErroListFC from './react/error-list/ErrorList';
 import * as TreeViewFC from './react/tree-view/TreeView';
 import * as ScrollableEditorFC from './react/editor';
 

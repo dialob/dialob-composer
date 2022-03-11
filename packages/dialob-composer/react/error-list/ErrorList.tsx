@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {List} from 'semantic-ui-react';
-import {connect} from 'react-redux';
-import {setActiveItem, showVariables, showValueSets} from '../actions';
+import React, { Component } from 'react';
+import { List } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { setActiveItem, showVariables, showValueSets } from '../actions';
 import { translateErrorType, translateErrorMessage } from '../helpers/utils';
 
 class ErrorList extends Component {
@@ -21,7 +21,7 @@ class ErrorList extends Component {
     if (error.get(0).get('type').startsWith('VALUESET')) {
       const [valueSetId] = error.get(0).get('itemId').split(':', 2);
       const item = this.props.items.find(i => i.get('valueSetId') === valueSetId);
-      if (item) { 
+      if (item) {
         return item.get('id');
       } else {
         return null;
@@ -41,33 +41,29 @@ class ErrorList extends Component {
   }
 
   render() {
-   if (this.props.errors) {
-    let errorMap = this.props.errors.groupBy(e => e.get('itemId') || '$general$');
-    let errors = errorMap.entrySeq().map((e, i) => {
-      const uiItemId = this.resolveItemId(e[1]);
-      return (
-        <List.Item key={i}>
-          <List.Icon name='warning sign' color={e[1].getIn([0, 'level']) != 'WARNING' ? 'red' : 'yellow'} size='large' />
-          <List.Content>
-            <List.Header as='a' onClick={this.clickHandler.bind(this, e[1], uiItemId)}>
-              {uiItemId ? uiItemId : 'Global list'}
-            </List.Header>
-            {
-              e[1].toSet().toList().map((m, j) => <React.Fragment key={j}>{this.translateError(m)}<br /></React.Fragment>)
-            }
-          </List.Content>
-        </List.Item>
-      );
+    if (this.props.errors) {
+      let errorMap = this.props.errors.groupBy(e => e.get('itemId') || '$general$');
+      let errors = errorMap.entrySeq().map((e, i) => {
+        const uiItemId = this.resolveItemId(e[1]);
+        return (
+          <List.Item key={i}>
+            <List.Icon name='warning sign' color={e[1].getIn([0, 'level']) != 'WARNING' ? 'red' : 'yellow'} size='large' />
+            <List.Content>
+              <List.Header as='a' onClick={this.clickHandler.bind(this, e[1], uiItemId)}>
+                {uiItemId ? uiItemId : 'Global list'}
+              </List.Header>
+              {
+                e[1].toSet().toList().map((m, j) => <React.Fragment key={j}>{this.translateError(m)}<br /></React.Fragment>)
+              }
+            </List.Content>
+          </List.Item>
+        );
       }
-    );
-   return (
-    <List divided>
-      {errors}
-    </List>
-   );
-   } else {
-     return null;
-   }
+      );
+      return (<List divided>{errors}</List>);
+    }
+    return null;
+
   }
 }
 
@@ -86,5 +82,4 @@ const ErrorListConnected = connect(
 
 export {
   ErrorList,
-  ErrorListConnected as default
 }
