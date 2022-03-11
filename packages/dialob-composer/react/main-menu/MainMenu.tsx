@@ -3,8 +3,8 @@ import { Container, Menu, Icon, Dropdown, Popup } from 'semantic-ui-react';
 
 import StatusIndicator from './StatusIndicator';
 import SearchMenu from './SearchMenu';
-import { Dialob } from '../global';
-import { useUtil } from './util';
+import { Dialob } from '../../global';
+import { useUtil } from '../util';
 
 const Languages: React.FC<{}> = () => {
   const config = Dialob.useConfig();

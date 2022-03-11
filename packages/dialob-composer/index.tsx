@@ -4,25 +4,26 @@ import { Dialob } from './global';
 
 
 const DialobComposer: React.FC<{}> = () => {
-
+  const marginTop = '42px';
+  const paddingBottom = '55px';
+  const menuWidth = '300px';
 
   return (<>
-
     <Dialob.FC.MainMenu />
-    
-    {/*
     <div className='composer-editor-wrapper'>
       <div className='composer-editor-tree'>
-        <TreeView marginTop={marginTop} menuWidth={menuWidth} paddingBottom={paddingBottom} />
+        <Dialob.FC.TreeView marginTop={marginTop} menuWidth={menuWidth} paddingBottom={paddingBottom} />
       </div>
-      <ScrollableEditor />
+      <Dialob.FC.ScrollableEditor />
       <div className='composer-editor-errors'>
-        <ErrorList />
+        <Dialob.FC.ErrorList />
       </div>
       <div className='composer-editor-rules'>
-        <RuleEditor />
+        <Dialob.FC.RuleEditor />
       </div>
     </div>
+    {/*
+
     <ConfirmationDialog />
     <ItemOptionsDialog />
     <FormOptionsDialog />
