@@ -8,7 +8,7 @@ export const useConfig = () => {
   
   
   const getLanguageName = (code: string) => {
-    return state.config.defaults.languages.find(lang => lang.code === code)?.name;
+    return state.defaults.languages.find(lang => lang.code === code)?.name;
   }
   
   return { state, setConfig, getLanguageName };

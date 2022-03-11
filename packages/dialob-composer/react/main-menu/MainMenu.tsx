@@ -14,7 +14,7 @@ const Languages: React.FC<{}> = () => {
   
 
   return (<>{
-    config.state.config.defaults.languages
+    config.state.defaults.languages
       .filter(lang => formLanguages?.includes(lang.code))
       .map((lang, i) =>
         <Dropdown.Item key={i} active={lang.code === editor.state.activeLanguage}
@@ -62,7 +62,7 @@ const MainMenu: React.FC<{}> = ({ }) => {
           </Dropdown.Menu>
         </Dropdown>
         <Menu.Item onClick={() => {
-          let win = window.open(config.state.config.defaults.documentationUrl);
+          let win = window.open(config.state.defaults.documentationUrl);
           if (win) {
             win.focus();
           }

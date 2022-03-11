@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, Loader } from 'semantic-ui-react';
-import { Dialob } from '../global';
+import { Dialob } from '../../global';
 
 
 const StatusIndicator: React.FC<{ status: Dialob.EditorStatus }> = ({status}) => {

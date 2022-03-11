@@ -1,4 +1,5 @@
 import React from 'react';
+import { Editor } from './Editor'; 
 const scroll = require("react-redux-scroll");
 
 const scrollableEditor = (EditorColumn: React.FC<{}>) => scroll.scrollableArea(EditorColumn);

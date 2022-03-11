@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, Ref } from 'semantic-ui-react';
 
 import escapeRegexp from 'lodash.escaperegexp';
-import { Dialob } from '../global';
+import { Dialob } from '../../global';
 
 
 interface SearchResult {

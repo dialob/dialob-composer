@@ -35,7 +35,7 @@ export interface Editor {
   newTagDialog: boolean;
 
   contextValues?: Record<string, string | undefined>;
-
+  
   treeCollapse?: string[];
   confirmableAction?: any; // TODO::  
   versions: any // TODO 

@@ -6,6 +6,11 @@ export type Type = 'VISIBILITY' | 'VALIDATION' | 'REQUIREMENT' | 'VARIABLE' | 'G
 export interface ConfigState {
   config: Config
   service: FormService;
+  defaults: {
+    documentationUrl: string,
+    languages: {code: string, name: string, flag: string}[],
+    pageConfig: {type: string, view: string, id: string}
+  }
 }
 
 export interface Config {
@@ -14,10 +19,6 @@ export interface Config {
     apiUrl: string,
     previewUrl: string,
     tenantId: string,
-  },
-  defaults: {
-    documentationUrl: string,
-    languages: {code: string, name: string, flag: string}[]
   }
   itemEditors: {
     items: {
