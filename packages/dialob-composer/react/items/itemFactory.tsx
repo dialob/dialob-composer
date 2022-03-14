@@ -19,8 +19,6 @@ const ItemFactory: React.FC<{item: Dialob.DialobItem, props: {}, config?: Dialob
   return <itemConfig.component key={item.id} itemType={item.type} itemId={item.id} {...itemConfig.props} {...props} />;
 }
 
-
-
 const TreeItemFactory: React.FC<{item: Dialob.DialobItem, props: {}, config?: Dialob.ConfigItemEditors }> = ({ item, props, config: overrides }) => {
   const { state } = Dialob.useConfig();
   const config = overrides ? overrides : state.config.itemEditors; 
