@@ -53,6 +53,7 @@ export const useUtil = () => {
       editor.setActivePage(pageId);
     }
   }
+  
 
 
   const addItem = (itemTemplate: Dialob.DialobItem, parentItemId: string, afterItemId?: string) => {
@@ -123,7 +124,7 @@ export const useUtil = () => {
     editor.hidePreviewCtx();
   }
 
-  return { downloadForm, requestPreview, redirectPreview, copyItem, addItem, setActiveItem };
+  return { downloadForm, requestPreview, redirectPreview, copyItem, addItem, setActiveItem, updateItem };
 }
 
 

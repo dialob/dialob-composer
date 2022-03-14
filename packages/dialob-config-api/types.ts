@@ -1,3 +1,4 @@
+import { DialobItem } from '../dialob-form-api';
 export interface Csrf { token: string, headerName: string }
 export type Level = 'INFO' | 'WARNING' | 'ERROR' | 'FATAL' | 'OK';
 export type Type = 'VISIBILITY' | 'VALIDATION' | 'REQUIREMENT' | 'VARIABLE' | 'GENERAL' | 'CLASSNAME' | 'VALUESET' | 'VALUESET_ENTRY';
@@ -52,6 +53,19 @@ export interface ConfigItemType {
 
 }
 
+export interface ConfigItemEditors {
+  items: {
+    matcher: (item: DialobItem, props?: {}) => boolean,
+    component: React.ElementType<{itemType: string, itemId: string}>,
+    hideInTree?: boolean
+    props: {
+      icon: string,
+      placeholder: string,
+      treeCollapsible?: boolean,
+    }
+  }[]
+}
+
 export interface Config {
   transport: {
     csrf?: Csrf,
@@ -59,17 +73,7 @@ export interface Config {
     previewUrl: string,
     tenantId: string,
   }
-  itemEditors: {
-    items: {
-      matcher: (item: any) => boolean,
-      component: React.ReactElement,
-      props: {
-        icon: string,
-        placeholder: string,
-        treeCollapsible: boolean,
-      }
-    }[]
-  },
+  itemEditors: ConfigItemEditors,
   itemTypes: { categories: ConfigCategoryType[] }
   valueSetProps: { title: string, name: string, editor: React.ReactElement }[],
   closeHandler: () => void;
