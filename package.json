@@ -15,7 +15,7 @@
     "start": "./build-scripts/start-dev.sh && react-scripts start"
   },
   "dependencies": {
-    "classnames": "2.2.6",
+    "classnames": "^2.3.1",
     "codemirror": "5.58.1",
     "file-saver": "2.0.2",
     "immutable": "3.8.2",
@@ -29,9 +29,7 @@
     "react-dnd-html5-backend": "10.0.2",
     "react-dom": "^17.0.2",
     "react-markdown": "^8.0.0",
-    
     "react-redux-scroll": "^0.1.3",
-    
     "remove-markdown": "0.3.0",
     "semantic-ui-react": "2.0.3"
   },
@@ -39,6 +37,7 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
     "@types/file-saver": "^2.0.5",
     "@types/jest": "^26.0.13",
     "@types/lodash.camelcase": "^4.3.6",

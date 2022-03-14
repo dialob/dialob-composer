@@ -1,5 +1,6 @@
 import { Dialob } from '../../global';
 import { useUtil } from '../util';
+import { ItemFactory } from './itemFactory';
 
 const getErrorLevel = (errors: Dialob.EditorError[]): Dialob.EditorStatus => {
   if (!errors || errors.length === 0) {
@@ -19,9 +20,8 @@ const getBorderColor = (props: { active: boolean, errorLevel: Dialob.EditorStatu
     return 'yellow';
   } else if (props.errorLevel === 'STATUS_ERRORS') {
     return 'red';
-  } else {
-    return null;
   }
+  return undefined;
 }
 
 const useItem = (itemId: string) => {
@@ -35,7 +35,7 @@ const useItem = (itemId: string) => {
     editor.state.errors.filter(e => (e.message.startsWith('VALUESET_') && e.itemId === item.valueSetId) || e.itemId === itemId)
     : [];
 
-  const active = item && itemId === editor.state.activeItemId,
+  const active = item && itemId === editor.state.activeItemId;
   const errorLevel = getErrorLevel(errors);
   const borderColor = getBorderColor({ errorLevel, active });
   return {
@@ -48,11 +48,17 @@ const useItem = (itemId: string) => {
     rootItemId: editor.state.rootItemId,
     validations: item && item.validations,
 
+
     setActivePage: (pageId: string) => editor.setActivePage(pageId),
     newItem: (config: Dialob.DialobItem, parentItemId: string, afterItemId?: string) => util.addItem(config, parentItemId, afterItemId),
-    setAttribute: (itemId: string, attribute: string, value: string, language?: string) => form.updateItem(itemId, attribute, value, language),
-    changeId: (itemId: string) => editor.showChangeId(itemId),
+    setAttribute: (attribute: string, value: string, language?: string) => form.updateItem(itemId, attribute, value, language),
+    changeId: () => editor.showChangeId(itemId),
     setTreeCollapsed: (collapsed: boolean) => editor.setTreeCollapse({ itemId, collapsed }),
+
+    deleteItem: () => {
+      editor.deleteItem(itemId);
+      form.deleteItem(itemId);
+    },
 
     setActive: (noScroll = false) => {
       if (editor.state.itemOptions?.isPage) {
@@ -61,12 +67,15 @@ const useItem = (itemId: string) => {
         util.setActiveItem(itemId, noScroll);
       }
     },
-    createChildren: (props: {}, config: ) => {
+    createChildren: (props: {}, config?: Dialob.ConfigItemEditors) => {
       return item && item.items && item.items
         .map(nextId => form.state.data[nextId])
-        .map(item => itemFactory(item, props, config));
+        .map(item => <ItemFactory item={item} props={props} config={config} />);
+
     }
-
   }
+}
 
-  export { useItem }
+export { useItem }
+
+

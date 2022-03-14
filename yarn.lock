@@ -1440,7 +1440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.10.5, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.10.5, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.17.2
   resolution: "@babel/runtime@npm:7.17.2"
   dependencies:
@@ -2230,6 +2230,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@resys/dialob-composer@workspace:."
   dependencies:
+    "@types/classnames": ^2.3.1
     "@types/file-saver": ^2.0.5
     "@types/jest": ^26.0.13
     "@types/lodash.camelcase": ^4.3.6
@@ -2238,14 +2239,13 @@ __metadata:
     "@types/react": ^16.9.49
     "@types/react-dom": ^17.0.11
     "@types/react-redux": ^7.1.22
-    classnames: 2.2.6
+    classnames: ^2.3.1
     codemirror: 5.58.1
     eslint: ^8.0.0
     eslint-config-react-app: ^7.0.0
     file-saver: 2.0.2
     immutable: 3.8.2
     jest: ^26.4.2
-    lodash.debounce: ^4.0.8
     lodash.escaperegexp: ^4.1.2
     memoizee: 0.4.14
     moment: 2.24.0
@@ -2257,17 +2257,14 @@ __metadata:
     react-dnd-html5-backend: 10.0.2
     react-dom: ^17.0.2
     react-markdown: ^8.0.0
-    react-redux: 7.2.1
     react-redux-scroll: ^0.1.3
     react-scripts: 5.0.0
-    redux: 4.0.5
     remove-markdown: 0.3.0
     semantic-ui-react: 2.0.3
     ts-jest: ^26.3.0
     ts-loader: ^8.0.3
     ts-node: ^9.1.1
     typescript: ^4.1.3
-    use-lodash-debounce: ^1.2.0
   peerDependencies:
     react: ^17.0.2
   languageName: unknown
@@ -2592,6 +2589,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: bfcadb042a41b124c4e3de4925e3be6d35b78f93f27c4535d5ff86980dc0f8bc407ed99b9b54528952dc62834d5a779392f7a12c2947dd19330eb05a6bcae15a
+  languageName: node
+  linkType: hard
+
+"@types/classnames@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "@types/classnames@npm:2.3.1"
+  dependencies:
+    classnames: "*"
+  checksum: 09a17ea08fcb83380921efdfdac94cfa162f87025cae0bf6f4ba508c2fa5f436459ce7612905a3f968fdddb68c03b8e6ff08e762ed2d0c110c5c4fceb244dc55
   languageName: node
   linkType: hard
 
@@ -4560,10 +4566,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.2.6":
-  version: 2.2.6
-  resolution: "classnames@npm:2.2.6"
-  checksum: 09a4fda780158aa8399079898eabeeca0c48c28641d9e4de140db7412e5e346843039ded1af0152f755afc2cc246ff8c3d6f227bf0dcb004e070b7fa14ec54cc
+"classnames@npm:*, classnames@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "classnames@npm:2.3.1"
+  checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
   languageName: node
   linkType: hard
 
@@ -12288,7 +12294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1, react-is@npm:^16.6.3, react-is@npm:^16.7.0, react-is@npm:^16.9.0":
+"react-is@npm:^16.13.1, react-is@npm:^16.6.3, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
@@ -12351,27 +12357,6 @@ __metadata:
     react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
     redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
   checksum: 6e800bcfa1a9135bf58bd4e39c1ffc552c52a1555719846858e860ff17d651abb98a1a9d8b1b76f5e6329faab280d736881301be8531c0faa65c9094f6caec72
-  languageName: node
-  linkType: hard
-
-"react-redux@npm:7.2.1":
-  version: 7.2.1
-  resolution: "react-redux@npm:7.2.1"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    hoist-non-react-statics: ^3.3.0
-    loose-envify: ^1.4.0
-    prop-types: ^15.7.2
-    react-is: ^16.9.0
-  peerDependencies:
-    react: ^16.8.3
-    redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 905d70987051b941cfb380a371b8ed58556cdcbd5ec79de51b0224ba1da589d05f86e2d3d9e0180baf031994215e5ab218eea0b56bafe3e1ce4ca22de0e388f3
   languageName: node
   linkType: hard
 
@@ -12533,16 +12518,6 @@ __metadata:
   dependencies:
     minimatch: 3.0.4
   checksum: a6b22994d76458443d4a27f5fd7147ac63ad31bba972666a291d511d4d819ee40ff71ba7524c14f6a565b8cfaf7f48b318f971804b913cf538d58f04e25d1fee
-  languageName: node
-  linkType: hard
-
-"redux@npm:4.0.5":
-  version: 4.0.5
-  resolution: "redux@npm:4.0.5"
-  dependencies:
-    loose-envify: ^1.4.0
-    symbol-observable: ^1.2.0
-  checksum: 23689ba4318bfffd4517c8c8d49c5e9a7df1b864b3cf4a4784e10060652e28054586a4a64053d1252ae5f105da61cda03fe01a422b05a053c8604b1be1689d16
   languageName: node
   linkType: hard
 
@@ -13969,13 +13944,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"symbol-observable@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "symbol-observable@npm:1.2.0"
-  checksum: 48ffbc22e3d75f9853b3ff2ae94a44d84f386415110aea5effc24d84c502e03a4a6b7a8f75ebaf7b585780bda34eb5d6da3121f826a6f93398429d30032971b6
-  languageName: node
-  linkType: hard
-
 "symbol-tree@npm:^3.2.4":
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
@@ -14717,16 +14685,6 @@ __metadata:
   version: 0.1.0
   resolution: "urix@npm:0.1.0"
   checksum: 4c076ecfbf3411e888547fe844e52378ab5ada2d2f27625139011eada79925e77f7fbf0e4016d45e6a9e9adb6b7e64981bd49b22700c7c401c5fc15f423303b3
-  languageName: node
-  linkType: hard
-
-"use-lodash-debounce@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "use-lodash-debounce@npm:1.2.0"
-  peerDependencies:
-    lodash.debounce: ^4.0.8
-    react: ^16.9.0 || 17.x
-  checksum: 9184be4ca2c146c54e4de813f7e411ce2cdf7c9093aee5952213ddc13abba6391b34741d4cc69d35998e194edc007dffbd810af750611846fe8491fe871aa643
   languageName: node
   linkType: hard
 

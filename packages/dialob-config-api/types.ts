@@ -56,7 +56,7 @@ export interface ConfigItemType {
 export interface ConfigItemEditors {
   items: {
     matcher: (item: DialobItem, props?: {}) => boolean,
-    component: React.ElementType<{itemType: string, itemId: string}>,
+    component: React.ElementType<{itemType: string, itemId: string, parentItemId?: string}>,
     hideInTree?: boolean
     props: {
       icon: string,
