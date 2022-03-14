@@ -1,85 +1,72 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { List } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { setActiveItem, showVariables, showValueSets } from '../actions';
-import { translateErrorType, translateErrorMessage } from '../helpers/utils';
+import { Dialob } from '../../global';
+import groupBy from 'lodash/groupBy';
+import { translateErrorType, translateErrorMessage } from './utils';
 
-class ErrorList extends Component {
+const TranslateError: React.FC<{ error: Dialob.EditorError }> = ({ error }) => {
+  const type = translateErrorType(error);
+  const text = translateErrorMessage(error);
+  return (<>
+    <>
+      {type && <strong>{type}: </strong>}
+      {text}
+    </>
+    <br />
+  </>);
+}
 
-  translateError(error) {
-    const type = translateErrorType(error);
-    const text = translateErrorMessage(error);
-    return (
-      <React.Fragment>
-        {type && <strong>{type}: </strong>}
-        {text}
-      </React.Fragment>
-    );
-  }
-
-  resolveItemId(error) {
-    if (error.get(0).get('type').startsWith('VALUESET')) {
-      const [valueSetId] = error.get(0).get('itemId').split(':', 2);
-      const item = this.props.items.find(i => i.get('valueSetId') === valueSetId);
-      if (item) {
-        return item.get('id');
-      } else {
-        return null;
-      }
+const resolveItemId = (errors: Dialob.EditorError[], form: Dialob.ComposerState) => {
+  const first = errors[0];
+  if (first.type.startsWith('VALUESET')) {
+    const [valueSetId] = first.itemId.split(':', 2);
+    const item = Object.values(form.data).find(i => i.valueSetId === valueSetId);
+    if (item) {
+      return item.get('id');
+    } else {
+      return null;
     }
-    return error.get(0).get('itemId');
   }
+  return first.itemId;
+}
 
-  clickHandler(error, itemId) {
-    if (error.getIn([0, 'type']) === 'VARIABLE') {
-      this.props.showVariables();
+const ErrorGroup: React.FC<{ group: Dialob.EditorError[] }> = ({ group }) => {
+  const editor = Dialob.useEditor();
+  const form = Dialob.useForm().state;
+  const uiItemId = resolveItemId(group, form);
+
+  const clickHandler = (itemId: string) => {
+    if (group[0].type === 'VARIABLE') {
+      editor.showVariables();
     } else if (itemId) {
-      this.props.setActiveItem(itemId);
-    } else if (!itemId && error.getIn([0, 'type']).startsWith('VALUESET')) {
-      this.props.showValueSets();
+      editor.setActiveItem(itemId);
+    } else if (!itemId && group[0].type.startsWith('VALUESET')) {
+      editor.showValuesets();
     }
   }
+  return (<List.Item>
+    <List.Icon name='warning sign' color={group[0].level != 'WARNING' ? 'red' : 'yellow'} size='large' />
+    <List.Content>
+      <List.Header as='a' onClick={() => clickHandler(uiItemId)}>
+        {uiItemId ? uiItemId : 'Global list'}
+      </List.Header>
+      {group.map((m, j) => <TranslateError key={j} error={m} />)}
+    </List.Content>
+  </List.Item>);
+}
 
-  render() {
-    if (this.props.errors) {
-      let errorMap = this.props.errors.groupBy(e => e.get('itemId') || '$general$');
-      let errors = errorMap.entrySeq().map((e, i) => {
-        const uiItemId = this.resolveItemId(e[1]);
-        return (
-          <List.Item key={i}>
-            <List.Icon name='warning sign' color={e[1].getIn([0, 'level']) != 'WARNING' ? 'red' : 'yellow'} size='large' />
-            <List.Content>
-              <List.Header as='a' onClick={this.clickHandler.bind(this, e[1], uiItemId)}>
-                {uiItemId ? uiItemId : 'Global list'}
-              </List.Header>
-              {
-                e[1].toSet().toList().map((m, j) => <React.Fragment key={j}>{this.translateError(m)}<br /></React.Fragment>)
-              }
-            </List.Content>
-          </List.Item>
-        );
-      }
-      );
-      return (<List divided>{errors}</List>);
-    }
+const ErrorList = () => {
+  const editor = Dialob.useEditor();
+  const errors = editor.state.errors;
+  if (!errors || errors.length === 0) {
     return null;
-
   }
+
+  const errorMap = groupBy(errors, e => e.itemId || '$general$');
+  return (<List divided>{
+    Object.entries(errorMap)
+      .map((entry, index) => (<ErrorGroup key={index} group={entry[1]} />))}
+  </List>);
 }
 
-const ErrorListConnected = connect(
-  state => ({
-    errors: state.dialobComposer.editor && state.dialobComposer.editor.get('errors'),
-    items: state.dialobComposer.form && state.dialobComposer.form.get('data'),
-    valueSets: state.dialobComposer.form && state.dialobComposer.form.get('valueSets')
-  }),
-  {
-    setActiveItem,
-    showVariables,
-    showValueSets
-  }
-)(ErrorList);
-
-export {
-  ErrorList,
-}
+export { ErrorList }

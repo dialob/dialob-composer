@@ -22,8 +22,8 @@ const DialobComposer: React.FC<{}> = () => {
         <Dialob.FC.RuleEditor />
       </div>
     </div>
+    
     {/*
-
     <ConfirmationDialog />
     <ItemOptionsDialog />
     <FormOptionsDialog />

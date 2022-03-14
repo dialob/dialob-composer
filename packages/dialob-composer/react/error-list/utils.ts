@@ -1,11 +1,11 @@
-export function translateErrorType(error) {
-  switch (error.get('type')) {
+export function translateErrorType(error: {type: string, message: string}) {
+  switch (error.type) {
     case 'VARIABLE':
       return 'Variable';
     case 'VISIBILITY':
       return 'Visibility';
     case 'GENERAL':
-      return error.get('message') === 'INVALID_DEFAULT_VALUE' ? 'Default' : '';
+      return error.message === 'INVALID_DEFAULT_VALUE' ? 'Default' : '';
     case 'REQUIREMENT':
       return 'Requirement';
     case 'VALIDATION':
@@ -15,12 +15,12 @@ export function translateErrorType(error) {
     case 'VALUESET_ENTRY':
       return 'Liet entry';
     default:
-      return error.get('type');
+      return error.type;
   };
 }
 
-export function translateErrorMessage(error) {
-  switch (error.get('message')) {
+export function translateErrorMessage(error: {expression?: string, message: string}) {
+  switch (error.message) {
     case 'RB_VARIABLE_NEEDS_EXPRESSION':
       return 'Missing expression';
     case 'INVALID_DEFAULT_VALUE':
@@ -40,7 +40,7 @@ export function translateErrorMessage(error) {
     case 'VALUESET_EMPTY':
       return 'Choice list is empty';
     case 'VALUESET_DUPLICATE_KEY':
-      return `Choice list has duplicate key '${error.get('expression')}'`;
+      return `Choice list has duplicate key '${error.expression}'`;
     case 'VALUESET_EMPTY_KEY':
       return 'Choice list has empty key';
     case 'CONTEXT_VARIABLE_UNDEFINED_TYPE':
@@ -65,7 +65,7 @@ export function translateErrorMessage(error) {
       return 'Undefined function';
 
     default:
-      return error.get('message');
+      return error.message;
   };
 }
 

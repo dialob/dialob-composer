@@ -10,9 +10,8 @@ import * as ScrollableEditorFC from './react/editor';
 
 declare namespace Dialob {
   export type {
-    EditorStatus,
-    DialobItem,
-    ContextVariable, ComposerState,
+    EditorStatus, EditorError,
+    DialobItem, ContextVariable, ComposerState,
     ConfigItemType, ConfigCategoryType
   }
   
