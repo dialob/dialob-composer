@@ -38,8 +38,12 @@ const useItem = (itemId: string) => {
   const active = item && itemId === editor.state.activeItemId;
   const errorLevel = getErrorLevel(errors);
   const borderColor = getBorderColor({ errorLevel, active });
+  
+  const itemLabel = item.label ? item.label[editor.state.activeLanguage] : undefined;
+  
   return {
     item, errors, errorLevel, borderColor, active,
+    itemLabel,
 
     language: editor.state.activeLanguage,
     itemEditors: config.state.config.itemEditors,
