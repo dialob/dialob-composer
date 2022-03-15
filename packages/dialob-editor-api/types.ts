@@ -19,7 +19,7 @@ export interface Editor {
   tag: string | 'LATEST'; //active tag
   
   changeId?: string;
-  rootItemId?: string;
+  rootItemId: string;
   activeLanguage: string;
   activeItemId?: string;
   activePageId? : string;

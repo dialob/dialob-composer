@@ -2236,9 +2236,11 @@ __metadata:
     "@types/lodash.camelcase": ^4.3.6
     "@types/lodash.debounce": ^4.0.6
     "@types/lodash.escaperegexp": ^4.1.6
+    "@types/memoizee": ^0.4.7
     "@types/react": ^16.9.49
     "@types/react-dom": ^17.0.11
     "@types/react-redux": ^7.1.22
+    "@types/remove-markdown": ^0.3.1
     classnames: ^2.3.1
     codemirror: 5.58.1
     eslint: ^8.0.0
@@ -2250,14 +2252,12 @@ __metadata:
     memoizee: 0.4.14
     moment: 2.24.0
     papaparse: ^5.3.0
-    prop-types: ^15.7.2
     react: 16.13.x
     react-autosuggest: ^10.0.2
     react-dnd: 10.0.2
     react-dnd-html5-backend: 10.0.2
     react-dom: ^17.0.2
     react-markdown: ^8.0.0
-    react-redux-scroll: ^0.1.3
     react-scripts: 5.0.0
     remove-markdown: 0.3.0
     semantic-ui-react: 2.0.3
@@ -2846,6 +2846,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/memoizee@npm:^0.4.7":
+  version: 0.4.7
+  resolution: "@types/memoizee@npm:0.4.7"
+  checksum: aa90865ef05ddc9436fea029fc4131a5f175952201766ebf92c404482969daef6dd36a307feab2f1e85902534244dcda822e884f43b9f7cc874adf1f180e1c90
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:^1":
   version: 1.3.2
   resolution: "@types/mime@npm:1.3.2"
@@ -2956,6 +2963,13 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 2c765e87c25421c23c6a813ec2b27a909bb051a2d84c07a0d5368ef22dca0e1dbb02489a79274316ad900bcbb1bec9a7153908c7012db4e8bb4a1c3f704330f5
+  languageName: node
+  linkType: hard
+
+"@types/remove-markdown@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@types/remove-markdown@npm:0.3.1"
+  checksum: a673aafa3a3722d959b4ad1d4e95b33f04f037a8bb95a82e843d6005b12b51f9b1bfd5954cd5c8707fbbb2f1d8865f7e632f02f99389ab83d0dcfd2cb1920dbb
   languageName: node
   linkType: hard
 
@@ -7319,13 +7333,6 @@ __metadata:
   bin:
     he: bin/he
   checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
-  languageName: node
-  linkType: hard
-
-"hoist-non-react-statics@npm:^2.5.5":
-  version: 2.5.5
-  resolution: "hoist-non-react-statics@npm:2.5.5"
-  checksum: ee2d05e5c7e1398ad84a15b0327f66bd78f38a8e0015e852f954b36434e32eb7e942d5357505020a3a1147f247b165bf1e69d72393e3accab67cafdafeb86230
   languageName: node
   linkType: hard
 
@@ -12058,7 +12065,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -12343,20 +12350,6 @@ __metadata:
     "@popperjs/core": ^2.0.0
     react: ^16.8.0 || ^17
   checksum: 915fcf08e1da4fd48a200074fcdd936f601ee2173f1e730cfed8a54fd47716aa8bf9cce2392463e3bcbe64a096d0baf463809ed2874b94d3a9d430ae6d817b5d
-  languageName: node
-  linkType: hard
-
-"react-redux-scroll@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "react-redux-scroll@npm:0.1.3"
-  dependencies:
-    hoist-non-react-statics: ^2.5.5
-    loose-envify: ^1.4.0
-    prop-types: ^15.6.1
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
-    redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
-  checksum: 6e800bcfa1a9135bf58bd4e39c1ffc552c52a1555719846858e860ff17d651abb98a1a9d8b1b76f5e6329faab280d736881301be8531c0faa65c9094f6caec72
   languageName: node
   linkType: hard
 

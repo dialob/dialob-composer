@@ -1,6 +1,6 @@
 import { Dialob } from '../../global';
 import { useUtil } from '../util';
-import { ItemFactory } from './itemFactory';
+import { ItemFactory } from './ItemFactory';
 
 const getErrorLevel = (errors: Dialob.EditorError[]): Dialob.EditorStatus => {
   if (!errors || errors.length === 0) {
@@ -38,7 +38,6 @@ const useItem = (itemId: string) => {
   const active = item && itemId === editor.state.activeItemId;
   const errorLevel = getErrorLevel(errors);
   const borderColor = getBorderColor({ errorLevel, active });
-  
   const itemLabel = item.label ? item.label[editor.state.activeLanguage] : undefined;
   
   return {
@@ -64,8 +63,8 @@ const useItem = (itemId: string) => {
       form.deleteItem(itemId);
     },
 
-    setActive: (noScroll = false) => {
-      if (editor.state.itemOptions?.isPage) {
+    setActive: (isPage: boolean, noScroll = false) => {
+      if (isPage) {
         editor.setActivePage(itemId);
       } else {
         util.setActiveItem(itemId, noScroll);

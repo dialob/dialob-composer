@@ -50,20 +50,31 @@ export interface ConfigItemType {
       country?: []
     }
   }
+}
 
+export interface ConfigItemEditorProps {
+  icon: string,
+  placeholder: string,
+  treeCollapsible?: boolean, 
+}
+
+export interface ItemEditorProps extends ConfigItemEditorProps {
+  itemType: string, 
+  itemId: string, 
+  treeCollapsible?: boolean
+  parentItemId?: string,
+  parentItemType?: string, 
+  pageId?: string,
+  isPage?: boolean,
+  overrides?: ConfigItemEditors
 }
 
 export interface ConfigItemEditors {
   items: {
     matcher: (item: DialobItem, props?: {}) => boolean,
-    component: React.ElementType<{itemType: string, itemId: string, parentItemId?: string}>,
+    component: React.ElementType<ItemEditorProps>,
     hideInTree?: boolean,
-    placeholder?: string,
-    props: {
-      icon: string,
-      placeholder: string,
-      treeCollapsible?: boolean,
-    }
+    props: ConfigItemEditorProps
   }[]
 }
 
